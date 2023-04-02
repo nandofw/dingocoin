@@ -24,7 +24,7 @@ int GetRandInt(int nMax);
 uint256 GetRandHash();
 
 /**
- * Add a little bit of randomness to the output of GetStrongRangBytes.
+ * Add a little bit of randomness to the output of GetStrongRandBytes.
  * This sleeps for a millisecond, so should only be called when there is
  * no other work to be done.
  */
