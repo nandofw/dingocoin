@@ -51,6 +51,7 @@ jobs:
     needs: create-source-distribution
     runs-on: ubuntu-20.04
     env:
+      SOURCE_ARTIFACT: source
       ARTIFACT_DIR: linux-binaries
       TEST_LOG_ARTIFACT_DIR: test-logs
     steps:
@@ -89,6 +90,7 @@ jobs:
     needs: create-source-distribution
     runs-on: ubuntu-20.04
     env:
+      SOURCE_ARTIFACT: source
       ARTIFACT_DIR: windows-binaries
     steps:
     - name: Getting Source
