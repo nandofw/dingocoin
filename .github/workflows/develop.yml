@@ -51,7 +51,6 @@ jobs:
     needs: create-source-distribution
     runs-on: ubuntu-20.04
     env:
-      SOURCE_ARTIFACT: source
       ARTIFACT_DIR: linux-binaries
       TEST_LOG_ARTIFACT_DIR: test-logs
     steps:
@@ -59,6 +58,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: ${{ env.SOURCE_ARTIFACT }}
+        path: ${{ env.SOURCE_ARTIFACT }}
     - name: Extract Archives
       run: |
         tar -xzf depends.tar.gz
@@ -90,13 +90,13 @@ jobs:
     needs: create-source-distribution
     runs-on: ubuntu-20.04
     env:
-      SOURCE_ARTIFACT: source
       ARTIFACT_DIR: windows-binaries
     steps:
     - name: Getting Source
       uses: actions/download-artifact@v3
       with:
         name: ${{ env.SOURCE_ARTIFACT }}
+        path: ${{ env.SOURCE_ARTIFACT }}
     - name: Extract Archives
       run: |
         tar -xzf depends.tar.gz
