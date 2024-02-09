@@ -1,4 +1,4 @@
-name: Continuous Integration on Master
+name: Continuous Integration on master branch
 on:
   push:
     branches:
