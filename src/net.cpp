@@ -1407,6 +1407,11 @@ void CConnman::ThreadSocketHandler()
     }
 }
 
+void CConnman::SetMaxConnections(int newMaxConnections)
+{
+    nMaxConnections = newMaxConnections;
+}
+
 void CConnman::WakeMessageHandler()
 {
     {
