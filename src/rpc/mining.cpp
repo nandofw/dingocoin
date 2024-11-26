@@ -149,7 +149,7 @@ UniValue generateBlocks(boost::shared_ptr<CReserveScript> coinbaseScript, int nG
                 continue;
             }
         }
-        boost::shared_ptr<const CBlock> shared_pblock = std::make_shared<const CBlock>(*pblock);
+        std::shared_ptr<const CBlock> shared_pblock = std::make_shared<const CBlock>(*pblock);
         if (!ProcessNewBlock(Params(), shared_pblock, true, NULL)) {
             if (nMineAuxPow) {
                 continue;
@@ -782,7 +782,7 @@ UniValue submitblock(const JSONRPCRequest& request)
             + HelpExampleRpc("submitblock", "\"mydata\"")
         );
 
-    boost::shared_ptr<CBlock> blockptr = std::make_shared<CBlock>();
+    std::shared_ptr<CBlock> blockptr = std::make_shared<CBlock>();
     CBlock& block = *blockptr;
     if (!DecodeHexBlk(block, request.params[0].get_str()))
         throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "Block decode failed");
@@ -1120,7 +1120,7 @@ static bool AuxMiningSubmitBlock(const std::string& hashHex, const std::string& 
 
     submitblock_StateCatcher sc(block.GetHash());
     RegisterValidationInterface(&sc);
-    boost::shared_ptr<const CBlock> shared_block
+    std::shared_ptr<const CBlock> shared_block
       = std::make_shared<const CBlock>(block);
     bool fAccepted = ProcessNewBlock(Params(), shared_block, true, nullptr);
     UnregisterValidationInterface(&sc);
@@ -1264,7 +1264,7 @@ UniValue getauxblockbip22(const JSONRPCRequest& request)
 
     submitblock_StateCatcher sc(block.GetHash());
     RegisterValidationInterface(&sc);
-    boost::shared_ptr<const CBlock> shared_block
+    std::shared_ptr<const CBlock> shared_block
       = std::make_shared<const CBlock>(block);
     bool fAccepted = ProcessNewBlock(Params(), shared_block, true, nullptr);
     UnregisterValidationInterface(&sc);
