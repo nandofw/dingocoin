@@ -96,7 +96,7 @@ UniValue getnetworkhashps(const JSONRPCRequest& request)
     return GetNetworkHashPS(request.params.size() > 0 ? request.params[0].get_int() : 120, request.params.size() > 1 ? request.params[1].get_int() : -1);
 }
 
-UniValue generateBlocks(std::shared_ptr<CReserveScript> coinbaseScript, int nGenerate, uint64_t nMaxTries, bool keepScript, int nMineAuxPow)
+UniValue generateBlocks(boost::shared_ptr<CReserveScript> coinbaseScript, int nGenerate, uint64_t nMaxTries, bool keepScript, int nMineAuxPow)
 {
     // Dingocoin: Never mine witness tx
     const bool fMineWitnessTx = false;
@@ -149,7 +149,7 @@ UniValue generateBlocks(std::shared_ptr<CReserveScript> coinbaseScript, int nGen
                 continue;
             }
         }
-        std::shared_ptr<const CBlock> shared_pblock = std::make_shared<const CBlock>(*pblock);
+        boost::shared_ptr<const CBlock> shared_pblock = std::make_shared<const CBlock>(*pblock);
         if (!ProcessNewBlock(Params(), shared_pblock, true, NULL)) {
             if (nMineAuxPow) {
                 continue;
@@ -197,7 +197,7 @@ UniValue generate(const JSONRPCRequest& request)
         nMineAuxPow = request.params[2].get_int();
     }
 
-    std::shared_ptr<CReserveScript> coinbaseScript;
+    boost::shared_ptr<CReserveScript> coinbaseScript;
     GetMainSignals().ScriptForMining(coinbaseScript);
 
     // If the keypool is exhausted, no script is returned at all.  Catch this.
@@ -244,7 +244,7 @@ UniValue generatetoaddress(const JSONRPCRequest& request)
     if (!address.IsValid())
         throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Error: Invalid address");
 
-    std::shared_ptr<CReserveScript> coinbaseScript(new CReserveScript());
+    boost::shared_ptr<CReserveScript> coinbaseScript(new CReserveScript());
     coinbaseScript->reserveScript = GetScriptForDestination(address.Get());
 
     return generateBlocks(coinbaseScript, nGenerate, nMaxTries, false, nMineAuxPow);
@@ -782,7 +782,7 @@ UniValue submitblock(const JSONRPCRequest& request)
             + HelpExampleRpc("submitblock", "\"mydata\"")
         );
 
-    std::shared_ptr<CBlock> blockptr = std::make_shared<CBlock>();
+    boost::shared_ptr<CBlock> blockptr = std::make_shared<CBlock>();
     CBlock& block = *blockptr;
     if (!DecodeHexBlk(block, request.params[0].get_str()))
         throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "Block decode failed");
@@ -1120,7 +1120,7 @@ static bool AuxMiningSubmitBlock(const std::string& hashHex, const std::string& 
 
     submitblock_StateCatcher sc(block.GetHash());
     RegisterValidationInterface(&sc);
-    std::shared_ptr<const CBlock> shared_block
+    boost::shared_ptr<const CBlock> shared_block
       = std::make_shared<const CBlock>(block);
     bool fAccepted = ProcessNewBlock(Params(), shared_block, true, nullptr);
     UnregisterValidationInterface(&sc);
@@ -1163,7 +1163,7 @@ UniValue getauxblockbip22(const JSONRPCRequest& request)
             + HelpExampleRpc("getauxblock", "")
             );
 
-    std::shared_ptr<CReserveScript> coinbaseScript;
+    boost::shared_ptr<CReserveScript> coinbaseScript;
     GetMainSignals().ScriptForMining(coinbaseScript);
 
     // If the keypool is exhausted, no script is returned at all.  Catch this.
@@ -1264,7 +1264,7 @@ UniValue getauxblockbip22(const JSONRPCRequest& request)
 
     submitblock_StateCatcher sc(block.GetHash());
     RegisterValidationInterface(&sc);
-    std::shared_ptr<const CBlock> shared_block
+    boost::shared_ptr<const CBlock> shared_block
       = std::make_shared<const CBlock>(block);
     bool fAccepted = ProcessNewBlock(Params(), shared_block, true, nullptr);
     UnregisterValidationInterface(&sc);
