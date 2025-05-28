@@ -259,7 +259,7 @@ if __name__ == '__main__':
                 retval = 1
                 continue
 
-            if arch == lief.Header.ARCHITECTURES.NONE:
+            if arch == lief.Header.ARCHITECTURES.UNKNOWN:
                 print(f'{filename}: unknown architecture')
                 retval = 1
                 continue
