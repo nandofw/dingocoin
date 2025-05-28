@@ -222,26 +222,26 @@ BASE_MACHO = [
 ]
 
 CHECKS = {
-    lief.EXE_FORMATS.ELF: {
+    lief.Binary.FORMATS.ELF: {
         #lief.ARCHITECTURES.X86: BASE_ELF + [('CONTROL_FLOW', check_ELF_control_flow)],
         # Note: until gcc8 or higher is used for release binaries,
         # do not check for CONTROL_FLOW
-        lief.ARCHITECTURES.X86: BASE_ELF,
-        lief.ARCHITECTURES.ARM: BASE_ELF,
-        lief.ARCHITECTURES.ARM64: BASE_ELF,
-        lief.ARCHITECTURES.PPC: BASE_ELF,
-        lief.ARCHITECTURES.RISCV: BASE_ELF,
+        lief.Header.ARCHITECTURES.X86: BASE_ELF,
+        lief.Header.ARCHITECTURES.ARM: BASE_ELF,
+        lief.Header.ARCHITECTURES.ARM64: BASE_ELF,
+        lief.Header.ARCHITECTURES.PPC: BASE_ELF,
+        lief.Header.ARCHITECTURES.RISCV: BASE_ELF,
     },
-    lief.EXE_FORMATS.PE: {
-        lief.ARCHITECTURES.X86: BASE_PE,
+    lief.Binary.FORMATS.PE: {
+        lief.Header.ARCHITECTURES.X86: BASE_PE,
     },
-    lief.EXE_FORMATS.MACHO: {
-        lief.ARCHITECTURES.X86: BASE_MACHO + [('PIE', check_PIE),
+    lief.Binary.FORMATS.MACHO: {
+        lief.Header.ARCHITECTURES.X86: BASE_MACHO + [('PIE', check_PIE),
                                               ('NX', check_NX),
                                               #('CONTROL_FLOW', check_MACHO_control_flow)
                                               # Note: Needs change in boost for -fcf-protection
                                               ],
-        lief.ARCHITECTURES.ARM64: BASE_MACHO,
+        lief.Header.ARCHITECTURES.ARM64: BASE_MACHO,
     }
 }
 
