@@ -61,6 +61,7 @@ ELF_ALLOWED_LIBRARIES = {
 'libgcc_s.so.1', # GCC base support
 'libc.so.6', # C library
 'libpthread.so.0', # threading
+'libanl.so.1', # DNS resolve
 'libm.so.6', # math library
 'librt.so.1', # real-time (clock)
 'libatomic.so.1',
@@ -71,6 +72,8 @@ ELF_ALLOWED_LIBRARIES = {
 'ld-linux-riscv64-lp64d.so.1', # 64-bit RISC-V dynamic linker
 # bitcoin-qt only
 'libxcb.so.1', # part of X11
+'libxkbcommon.so.0', # keyboard keymapping
+'libxkbcommon-x11.so.0', # keyboard keymapping
 'libfontconfig.so.1', # font support
 'libfreetype.so.6', # font parsing
 'libdl.so.2' # programming interface to dynamic linker
@@ -110,15 +113,24 @@ PE_ALLOWED_LIBRARIES = {
 'USER32.dll', # user interface
 'WS2_32.dll', # sockets
 # bitcoin-qt only
+'COMDLG32.DLL', # common dialogs like "open file"
+'comdlg32.dll', # same as above but lowercase in win64 binary
 'dwmapi.dll', # desktop window manager
 'GDI32.dll', # graphics device interface
-'IMM32.dll', # input method editor
+'IMM32.DLL', # input method editor
+'IMM32.dll', # same as above but lowercase extension in win64 binary
+'NETAPI32.dll',
 'ole32.dll', # component object model
 'OLEAUT32.dll', # OLE Automation API
 'SHLWAPI.dll', # light weight shell API
+'USERENV.dll',
 'UxTheme.dll',
 'VERSION.dll', # version checking
-'WINMM.dll', # WinMM audio API
+'WINMM.DLL', # WinMM audio API
+'WINMM.dll', # same as above but lowercase extension in win64 binary
+'WINSPOOL.DRV', # Printer spooler driver for paper wallet printing
+'WTSAPI32.dll',
+'CRYPT32.dll',
 }
 
 class CPPFilt(object):
