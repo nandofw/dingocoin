@@ -254,12 +254,12 @@ if __name__ == '__main__':
             arch = binary.abstract.header.architecture
             binary.concrete
 
-            if etype == lief.EXE_FORMATS.UNKNOWN:
+            if etype == lief.Binary.FORMATS.UNKNOWN:
                 print(f'{filename}: unknown executable format')
                 retval = 1
                 continue
 
-            if arch == lief.ARCHITECTURES.NONE:
+            if arch == lief.Header.ARCHITECTURES.NONE:
                 print(f'{filename}: unknown architecture')
                 retval = 1
                 continue
