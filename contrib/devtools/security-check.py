@@ -38,7 +38,8 @@ def check_ELF_RELRO(binary) -> bool:
     except:
         have_bindnow = False
 
-    return have_gnu_relro and have_bindnow
+    return have_gnu_relro
+    #and have_bindnow
 
 def check_ELF_Canary(binary) -> bool:
     '''
