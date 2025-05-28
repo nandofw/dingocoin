@@ -306,7 +306,11 @@ CHECKS = {
     ('NX', check_ELF_NX),
     ('RELRO', check_ELF_RELRO),
     ('Canary', check_ELF_Canary),
-    ('separate_code', check_ELF_separate_code),
+    #('separate_code', check_ELF_separate_code),
+    # Note: separate_code can be enabled once release binaries are
+    #       created with binutils 2.31 or explicitly configured on
+    #       binutils 2.30 with -z,separate-code,
+    # see Bitcoin Core commit 2e9e6377
 ],
 'PE': [
     ('DYNAMIC_BASE', check_PE_DYNAMIC_BASE),
