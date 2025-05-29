@@ -148,7 +148,7 @@ jobs:
 
       - name: Install standard lief wheel
         if: matrix.os != 'ubuntu-18.04'
-        run: python3 -m pip install lief==0.14.1
+        run: python3 -m pip install lief==0.13.2
 
       - name: Post install
         if: ${{ matrix.postinstall }}
