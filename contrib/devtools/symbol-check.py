@@ -54,7 +54,7 @@ MAX_VERSIONS = {
 
 # Ignore symbols that are exported as part of every executable
 IGNORE_EXPORTS = {
-  '_edata', '_end', '_init', '__bss_start', '_fini', '_IO_stdin_used',
+  '_edata', '_end', '_init', '__bss_start', '_fini', '_IO_stdin_used', '__libc_single_threaded'
   'stdin', 'stdout', 'stderr'
 }
 
